@@ -23,6 +23,24 @@ expected worst-case space complexity is O(1).
 
 """
 
+
+def compute_simpler(n):
+    max_zero_count = 0
+    current_zero_count = 0
+    while n % 2 == 0 and n > 0:
+        n //= 2
+    while n > 0:
+        res = n % 2
+        n //= 2
+        if res == 0:
+            current_zero_count += 1
+        else:
+            max_zero_count = current_zero_count if current_zero_count > max_zero_count \
+                else max_zero_count
+            current_zero_count = 0
+    return max_zero_count
+
+
 def compute(n):
     residual = 0
     quotien = n
@@ -30,14 +48,14 @@ def compute(n):
     current_zero_count = 0
     while residual == 0 and quotien > 0:
         residual = quotien % 2
-        #use
+        # use
         quotien = quotien // 2
-        #instead of (old version of code, not good)
-        #quotien = (quotien - residual) / 2
+        # instead of (old version of code, not good)
+        # quotien = (quotien - residual) / 2
     while quotien > 0:
         residual = quotien % 2
         quotien = quotien // 2
-        #quotien = (quotien - residual) / 2
+        # quotien = (quotien - residual) / 2
 
         if residual == 0:
             current_zero_count += 1
